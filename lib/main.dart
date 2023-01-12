@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_iot/common/common.dart';
 import 'package:lottie/lottie.dart';
+import 'package:smart_iot/screens/camerpage.dart';
+import 'package:smart_iot/screens/closetpage.dart';
 import 'package:smart_iot/screens/loading.dart';
+import 'package:smart_iot/screens/randompage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -319,9 +322,28 @@ class _MyPageState extends State<MyPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => Loading(firstBtn: firstBtn, secondBtn: secondBtn, thirdBtn: thirdBtn,)));
-                      
+                      //  Navigator.push(context,
+                      //      MaterialPageRoute(builder: (_) => Loading(firstBtn: firstBtn, secondBtn: secondBtn, thirdBtn: thirdBtn,)));
+                      if (firstBtn) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => Loading(
+                                      firstBtn: firstBtn,
+                                      secondBtn: secondBtn,
+                                      thirdBtn: thirdBtn,
+                                    )));
+                      } else if (secondBtn) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const CameraPage()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const ClosetPage()));
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(140.w, 50.h),
