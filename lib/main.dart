@@ -6,7 +6,8 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_iot/screens/camerpage.dart';
 import 'package:smart_iot/screens/closetpage.dart';
 import 'package:smart_iot/screens/loading.dart';
-import 'package:smart_iot/screens/randompage.dart';
+import 'package:animations/animations.dart';
+import 'package:smart_iot/screens/recommend.dart';
 
 void main() {
   runApp(const MyApp());
@@ -65,26 +66,40 @@ class _MyPageState extends State<MyPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 21.h),
-                  child: Container(
-                    width: 40.w,
-                    height: 40.h,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff2D385F),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 4.h),
-                          child: Icon(
-                            Icons.checkroom_outlined,
-                            color: Colors.white,
-                            size: 32.h,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => Recommend(firstBtn: firstBtn, secondBtn: secondBtn, thirdBtn: thirdBtn),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
                           ),
-                        )
-                      ],
+                        );
+                    },
+                    child: Container(
+                      width: 40.w,
+                      height: 40.h,
+                      decoration: const BoxDecoration(
+                        color: Color(0xff2D385F),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 4.h),
+                            child: Icon(
+                              Icons.checkroom_outlined,
+                              color: Colors.white,
+                              size: 32.h,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -326,23 +341,46 @@ class _MyPageState extends State<MyPage> {
                       //      MaterialPageRoute(builder: (_) => Loading(firstBtn: firstBtn, secondBtn: secondBtn, thirdBtn: thirdBtn,)));
                       if (firstBtn) {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => Loading(
-                                      firstBtn: firstBtn,
-                                      secondBtn: secondBtn,
-                                      thirdBtn: thirdBtn,
-                                    )));
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => Loading(
+                              firstBtn: firstBtn,
+                              secondBtn: secondBtn,
+                              thirdBtn: thirdBtn,
+                            ),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ),
+                        );
                       } else if (secondBtn) {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const CameraPage()));
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => const CameraPage(),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ),
+                        );
                       } else {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const ClosetPage()));
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => const ClosetPage(),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ),
+                        );
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) => const ClosetPage())
+                        //     );
                       }
                     },
                     style: ElevatedButton.styleFrom(
